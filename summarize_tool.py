@@ -2,54 +2,55 @@ import google.generativeai as genai
 from newspaper import Article
 import os
 
-# osライブラリを使って環境変数からAPIキーを読み込む
+# Use the os library to read the API key from an environment variable
 import os
 API_KEY = os.getenv("GOOGLE_API_KEY")
 
 if not API_KEY:
-    raise ValueError("APIキーが設定されていません。環境変数 'GOOGLE_API_KEY' を設定してください。")▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+    raise ValueError("API key is not set. Please set the 'GOOGLE_API_KEY' environment variable.")
 
-# APIキーを設定
+# Configure the API key
 genai.configure(api_key=API_KEY)
 
-# URLから記事を要約する関数（プログラムの本体）
+# Function to summarize an article from a URL (the main part of the program)
 def summarize_news_url(url):
     """
-    URLを受け取って、記事本文を抽出し、LLMで3行に要約する関数
+    A function that takes a URL, extracts the article body, 
+    and summarizes it into three lines using an LLM.
     """
     try:
-        # 1. URLから記事をダウンロードして内容を解析
+        # 1. Download and parse the article from the URL
         article = Article(url)
         article.download()
         article.parse()
         
-        # 記事の本文を取得
+        # Get the article's body text
         news_text = article.text
         
-        # 本文が短すぎる場合は、処理を中断してメッセージを返す
-        if len(news_text) < 200: # 200文字未満の場合は失敗とみなす
-            return "エラー：記事の本文をうまく取得できませんでした。Webサイトの構造が特殊か、文字数が少なすぎる可能性があります。別のURLでお試しください。"
+        # If the body text is too short, stop processing and return a message
+        if len(news_text) < 200: # Treat as failure if less than 200 characters
+            return "Error: Could not retrieve the article body successfully. The website's structure might be unusual, or the text content may be too short. Please try a different URL."
 
-        # 2. LLM (Gemini 1.5 Flash) のモデルを準備
+        # 2. Prepare the LLM model (Gemini 1.5 Flash)
         model = genai.GenerativeModel('gemini-1.5-flash')
 
-        # 3. LLMに渡す「指示書（プロンプト）」を作成
-        prompt = f"""以下のニュース記事を、最も重要なポイントを抑えて、小学生にも分かるように簡単な日本語で3行に要約してください。
+        # 3. Create the prompt (instructions) to pass to the LLM
+        prompt = f"""Please summarize the following news article into three simple lines, capturing the most important points as if you were explaining it to a grade school student.
 
         ---
-        記事本文：
+        Article Text:
         {news_text}
         ---
 
-        要約：
+        Summary:
         """
         
-        # 4. LLMにリクエストを送信して要約を生成
+        # 4. Send the request to the LLM to generate the summary
         response = model.generate_content(prompt)
         
         return response.text
 
     except Exception as e:
-        return f"エラーが発生しました: {e}"
+        return f"An error occurred: {e}"
 
-print("関数の準備が完了しました。次のセルで実際に使ってみましょう！")
+print("Function is ready. Let's try using it in the next cell!")
