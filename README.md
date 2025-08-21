@@ -37,7 +37,7 @@
 
 4.  **プログラムを実行します。**
     ```bash
-    python main.py
+    python summarize_tool.py
     ```
 
 ## 注意事項
