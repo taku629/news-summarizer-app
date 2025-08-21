@@ -1,46 +1,46 @@
-# News Summarizer Tool
+# ニュース記事要約ツール (News Summarizer Tool)
 
-A Python program that extracts the body text from a given news article URL and uses Google's Gemini API to summarize it in three lines.
+指定したニュース記事のURLから本文を抽出し、Googleの生成AIであるGemini APIを利用して内容を3行で要約するPythonプログラムです。
 
-## ✨ Features
+## ✨ 特徴 (Features)
 
-* **Automatic Text Extraction:** Uses the `newspaper3k` library to automatically fetch the article's body text from a URL.
-* **High-Quality AI Summarization:** Utilizes Google's latest model, `gemini-1.5-flash`, to generate a natural summary.
-* **Simple Execution:** Can be run from the terminal with a simple command.
+* **URLから自動で本文抽出:** `newspaper3k`ライブラリを使用して、記事の本文テキストを自動で取得します。
+* **AIによる高品質な要約:** Googleの最新モデル`gemini-1.5-flash`を利用して、自然な日本語で要約を生成します。
+* **簡単な実行:** ターミナルから簡単なコマンドで実行できます。
 
-## 🛠️ Tech Stack
+## 🛠️ 使用技術 (Tech Stack)
 
 * Python 3
 * Google Generative AI for Python
 * newspaper3k
 
-## Usage
+## 使い方 (Usage)
 
-1.  **Clone or download the repository.**
+1.  **リポジトリをクローンまたはダウンロードします。**
 
-2.  **Install the required libraries.**
+2.  **必要なライブラリをインストールします。**
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Set up your API key.**
-    To run this program, you need a Google AI API key. Set it up as an environment variable using the commands below.
-
-    **(For Windows)**
+3.  **APIキーを設定します。**
+    このプログラムを実行するには、Google AIのAPIキーが必要です。以下のコマンドで環境変数として設定してください。
+    
+    **(Windowsの場合)**
     ```bash
-    set GOOGLE_API_KEY="Paste your API key here"
+    set GOOGLE_API_KEY="ここにあなたのAPIキーを貼り付け"
     ```
-    **(For Mac/Linux)**
+    **(Mac/Linuxの場合)**
     ```bash
-    export GOOGLE_API_KEY="Paste your API key here"
-    ```
-
-4.  **Run the program.**
-    ```bash
-    python summarize_tool.py
+    export GOOGLE_API_KEY="ここにあなたのAPIキーを貼り付け"
     ```
 
-## Notes
+4.  **プログラムを実行します。**
+    ```bash
+    python main.py
+    ```
 
-* Depending on the website's structure, extracting the article body may fail.
-* When submitting this code as part of your portfolio, please be careful not to hardcode your API key directly into the code or expose it on GitHub.
+## 注意事項
+
+* Webサイトの構造によっては、記事本文の抽出に失敗する場合があります。
+* このコードをポートフォリオとして提出する際は、APIキーを直接コードに書き込んだり、GitHubに公開したりしないようご注意ください。
